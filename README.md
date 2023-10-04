@@ -1,7 +1,7 @@
 ﻿# GifSearchApp
 Creating Android application meant for gif searching
 
-##Requirements:
+## Requirements:
 Implement "live search" - i.e. request is sent in N milliseconds (for example 300) after the user has entered some input;
 Results are displayed in the list or grid of items;
 Request pagination - load enough items to populate the list and load more items every time the user scrolls to the end of the list (limit/offset);
