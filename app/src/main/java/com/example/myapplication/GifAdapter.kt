@@ -21,13 +21,13 @@ class GifAdapter(private val gifUrls: MutableList<String> = mutableListOf()) : R
         return ViewHolder(view)
     }
 
-    // handles gif loading
+    // handles gif loading into the imageView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val gifUrl = gifUrls[position]
         Glide.with(holder.imageView)
             .asGif()
             .load(gifUrl)
-            .placeholder(R.drawable.placeholder_image) // Specify the placeholder image here
+            .placeholder(R.drawable.placeholder_image)
             .into(holder.imageView)
     }
 

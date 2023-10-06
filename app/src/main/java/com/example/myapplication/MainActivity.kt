@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 /*
 * updated code tested on Pixel 7 Pro API 30 and Samsung Galaxy s22+ (physical device), works fine on both
-* but scrolling is worse on the emulator, so I assume that it might be an issue with the emulator not being as responsive
-* */
+* but scrolling is worse on the emulator, so I assume that it might be an issue with the emulator itself
+*/
 class MainActivity : AppCompatActivity() {
     private lateinit var editText: EditText
     private lateinit var hiddenResultView: RecyclerView
