@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.GiphyResponse
-import com.example.myapplication.GiphyService
+import kotlinx.coroutines.delay
 import retrofit2.Response
 
 class GiphyViewModel : ViewModel() {
@@ -19,11 +19,13 @@ class GiphyViewModel : ViewModel() {
     val gifUrls: LiveData<List<String>> get() = _gifUrls
 
     var offset = 0
-    private val limit = 12
+    private val limit = 12 // changes the amount of gifs loaded at a time
 
     var isLoading = false
     var isLastPage = false
 
+
+    // checks the offset of pages and either clears the list of gifs (offset == 0) or appends the links to newGifUrls
     fun searchGifs(query: String) {
         if (isLoading || isLastPage) {
             return
@@ -32,6 +34,7 @@ class GiphyViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
+
                 val response: Response<GiphyResponse> = withContext(Dispatchers.IO) {
                     giphyService.searchGifs(apiKey, query, offset, limit).execute()
                 }
@@ -43,7 +46,7 @@ class GiphyViewModel : ViewModel() {
                     Log.d("GifAdapter", "Fetched ${gifs.size} GIFs")
 
 
-                    // Clear the old list if it's the first page
+                    // clear the old list if it's the first page
                     if (offset == 0) {
                         _gifUrls.value = emptyList()
                     }
@@ -66,7 +69,7 @@ class GiphyViewModel : ViewModel() {
                     Log.e("ERROR", "Error: ${response.code()}")
                 }
             } catch (e: Exception) {
-                Log.e("ERROR", "$e")
+                Log.e("EXCEPTION", "$e")
             }
         }
     }

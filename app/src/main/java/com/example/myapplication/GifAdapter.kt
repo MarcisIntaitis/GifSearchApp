@@ -27,6 +27,7 @@ class GifAdapter(private val gifUrls: MutableList<String> = mutableListOf()) : R
         Glide.with(holder.imageView)
             .asGif()
             .load(gifUrl)
+            .placeholder(R.drawable.placeholder_image) // Specify the placeholder image here
             .into(holder.imageView)
     }
 
